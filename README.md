@@ -38,3 +38,4 @@ bookstore/
 └── main.go           # Entry point aplikasi  
 ```  
 
+![image](https://github.com/user-attachments/assets/d5cdfc92-b086-4d8f-81df-bdf5e941f8d6)  
