@@ -7,6 +7,7 @@ type Book struct {
 	Description string  `json:"description"`
 	Price       float64 `json:"price"`
 	Status      string  `json:"status"`
+	Qty         int     `json:"qty"`
 }
 
 //Struktur JSON tiap response

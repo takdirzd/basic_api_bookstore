@@ -19,7 +19,7 @@ func GetBooksHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Query ke database
 	rows, err := db.Conn.Query(context.Background(),
-		"SELECT id, name, description, price, status FROM book")
+		"SELECT id, name, description, price, status, qty FROM book")
 	if err != nil {
 		utils.JSONResponse(w, http.StatusBadRequest, r.Method, "Failed Get data")
 		return
@@ -30,7 +30,7 @@ func GetBooksHandler(w http.ResponseWriter, r *http.Request) {
 	var books []model.Book
 	for rows.Next() {
 		var book model.Book
-		if err := rows.Scan(&book.ID, &book.Name, &book.Description, &book.Price, &book.Status); err != nil {
+		if err := rows.Scan(&book.ID, &book.Name, &book.Description, &book.Price, &book.Status, &book.Qty); err != nil {
 			utils.JSONResponse(w, http.StatusBadRequest, r.Method, "Failed scan data")
 			return
 		}
