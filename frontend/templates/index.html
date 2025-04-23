@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .block {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: auto;
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .ribbon img {
+            float: left;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="block">
+        <div class="ribbon">
+        </div>
+        <h1>Daftar Buku</h1>
+        <button onclick="getBooks()">Tampilkan List Buku</button>
+
+        <table id="book-table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th>Harga</th>
+                    <th>Status</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody id="book-list"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function getBooks() {
+            const response = await fetch("http://localhost:8080/go/books/get");
+            const data = await response.json();
+            const tableBody = document.getElementById("book-list");
+            tableBody.innerHTML = "";  // Bersihkan tabel sebelum menambah data baru
+            data.forEach(book => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${book.name}</td>
+                    <td>${book.description}</td>
+                    <td>${book.price}</td>
+                    <td>${book.status}</td>
+                    <td>${book.qty}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
