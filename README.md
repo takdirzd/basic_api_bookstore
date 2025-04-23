@@ -51,5 +51,6 @@ backend/
 │   └── manage.py
 ```
 
-![image](https://github.com/user-attachments/assets/ddf77d92-7c20-4346-b1a8-cbc071e89824)
+![image](https://github.com/user-attachments/assets/9b283c20-355e-4679-8711-26fa97a1523e)
+
 
