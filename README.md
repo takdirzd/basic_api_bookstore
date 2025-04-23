@@ -11,7 +11,6 @@ Ini adalah aplikasi **backend sederhana** untuk toko buku (Bookstore) yang diban
 - **Update Book**: Mengubah status atau detail buku  
 - **Delete Book**: Menghapus data buku berdasarkan ID  
 - **Validasi Method**: Menolak method selain yang diizinkan  
-- **Response JSON konsisten**: Semua response baik berhasil maupun gagal diberikan dalam format JSON  
 - **.env Integration**: Konfigurasi database menggunakan file `.env`  
 - **Custom Response Struct**: Format response seperti `status`, `method`, dan `description`  
   
