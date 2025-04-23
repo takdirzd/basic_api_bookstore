@@ -37,4 +37,5 @@ bookstore/
 └── main.go           # Entry point aplikasi  
 ```  
 
-![image](https://github.com/user-attachments/assets/d5cdfc92-b086-4d8f-81df-bdf5e941f8d6)  
+![image](https://github.com/user-attachments/assets/ddf77d92-7c20-4346-b1a8-cbc071e89824)
+
