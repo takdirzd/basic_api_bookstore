@@ -1,6 +1,6 @@
 # Aplikasi sederhana Bookstore Backend API (Go + PostgreSQL)  
   
-Ini adalah aplikasi **backend sederhana** untuk toko buku (Bookstore) yang dibangun menggunakan **Go** dan **PostgreSQL**. Proyek ini mendukung berbagai operasi CRUD dasar melalui RESTful API, dengan struktur kode yang terorganisir.  
+Ini adalah aplikasi **backend sederhana** untuk toko buku (Bookstore) yang dibangun menggunakan **Go** dan **PostgreSQL**. Proyek ini mendukung berbagai operasi CRUD dasar melalui RESTful API, dan untuk frontend menggunakan **Python** dan Django sebagai framework web.  
   
 ---  
   
