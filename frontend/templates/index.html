@@ -1,110 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookstore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+    h1 {
+      text-align: center;
+    }
 
-        .block {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            margin: auto;
-            width: 90%;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-        }
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
 
-        .ribbon img {
-            float: left;
-            margin-right: 10px;
-        }
+    .form-box {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex-grow: 1;
+    }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            margin: 20px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .form-box.add {
+      flex-basis: 25%;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    .form-box h2 {
+      margin-top: 0;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+    .form-box input, .form-box textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
 
-        table, th, td {
-            border: 1px solid black;
-        }
+    .form-box button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
+    .form-box button:hover {
+      background-color: #45a049;
+    }
 
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+  </style>
 </head>
 <body>
-    <div class="block">
-        <div class="ribbon">
-        </div>
-        <h1>Daftar Buku</h1>
-        <button onclick="getBooks()">Tampilkan List Buku</button>
+  <h1>Manajemen Buku</h1>
 
-        <table id="book-table">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Deskripsi</th>
-                    <th>Harga</th>
-                    <th>Status</th>
-                    <th>Jumlah</th>
-                </tr>
-            </thead>
-            <tbody id="book-list"></tbody>
-        </table>
+  <div class="top-section">
+    <!-- Tambah Buku -->
+    <div class="form-box add">
+      <h2>Tambah Buku</h2>
+      <form onsubmit="event.preventDefault(); addBook();">
+        <input type="text" id="name" placeholder="Nama Buku" required />
+        <textarea id="description" placeholder="Deskripsi" required></textarea>
+        <input type="number" id="price" placeholder="Harga" required />
+        <button type="submit">Tambah</button>
+      </form>
     </div>
 
-    <script>
-        async function getBooks() {
-            const response = await fetch("http://localhost:8080/go/books/get");
-            const data = await response.json();
-            const tableBody = document.getElementById("book-list");
-            tableBody.innerHTML = "";  // Bersihkan tabel sebelum menambah data baru
-            data.forEach(book => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${book.name}</td>
-                    <td>${book.description}</td>
-                    <td>${book.price}</td>
-                    <td>${book.status}</td>
-                    <td>${book.qty}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+    <!-- Update Buku -->
+    <div class="form-box">
+      <h2>Update Buku</h2>
+      <form onsubmit="event.preventDefault(); updateBook();">
+        <input type="text" id="update-id" placeholder="ID Buku" required />
+        <input type="text" id="update-status" placeholder="Status Baru" required />
+        <button type="submit">Update</button>
+      </form>
+    </div>
+
+    <!-- Hapus Buku -->
+    <div class="form-box">
+      <h2>Hapus Buku</h2>
+      <form onsubmit="event.preventDefault(); deleteBook();">
+        <input type="text" id="delete-id" placeholder="ID Buku" required />
+        <button type="submit">Hapus</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabel Buku -->
+  <h2>Daftar Buku</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Deskripsi</th>
+        <th>Harga</th>
+        <th>Status</th>
+        <th>Jumlah</th>
+      </tr>
+    </thead>
+    <tbody id="book-list"></tbody>
+  </table>
+
+  <script>
+    async function getBooks() {
+      const response = await fetch("http://localhost:8080/go/books/get");
+      const data = await response.json();
+      const tableBody = document.getElementById("book-list");
+      tableBody.innerHTML = "";
+      data.forEach(book => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${book.id}</td>
+          <td>${book.name}</td>
+          <td>${book.description}</td>
+          <td>${book.price}</td>
+          <td>${book.status}</td>
+          <td>${book.qty}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+async function addBook() {
+    const name = document.getElementById("name").value;
+    const description = document.getElementById("description").value;
+    const price = parseFloat(document.getElementById("price").value); // <- ini penting
+
+    const bookData = {
+        name,
+        description,
+        price
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/go/books/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookData)
+        });
+
+        if (response.ok) {
+            alert("Buku berhasil ditambahkan!");
+            getBooks(); // Refresh otomatis
+        } else {
+            const error = await response.json();
+            console.error("Server Error:", error);
+            alert("Gagal menambahkan buku: " + (error.message || "Unknown error"));
         }
-    </script>
+    } catch (error) {
+        console.error("Client Error:", error);
+        alert("Terjadi kesalahan saat menambah buku.");
+    }
+}
+
+
+    async function addBook() {
+        const name = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+        const price = parseFloat(document.getElementById("price").value); // <- ini penting
+
+        const bookData = {
+            name,
+            description,
+            price
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/go/books/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(bookData)
+            });
+
+            if (response.ok) {
+                alert("Buku berhasil ditambahkan!");
+                getBooks(); // Refresh otomatis
+            } else {
+                const error = await response.json();
+                console.error("Server Error:", error);
+                alert("Gagal menambahkan buku: " + (error.message || "Unknown error"));
+            }
+        } catch (error) {
+            console.error("Client Error:", error);
+            alert("Terjadi kesalahan saat menambah buku.");
+        }
+    }
+
+
+    async function deleteBook() {
+      const id = document.getElementById("delete-id").value;
+
+      const response = await fetch(`http://localhost:8080/go/books/delete/${id}`, {
+        method: "DELETE"
+      });
+
+      if (response.ok) {
+        alert("Buku berhasil dihapus.");
+        getBooks();
+      } else {
+        alert("Gagal menghapus buku.");
+      }
+    }
+
+    // Panggil pertama kali saat load
+    getBooks();
+  </script>
 </body>
 </html>
