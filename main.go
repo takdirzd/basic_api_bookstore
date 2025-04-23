@@ -8,6 +8,7 @@ import (
 
 	"bookstore/db"
 	"bookstore/handler"
+	"bookstore/utils"
 
 	"github.com/joho/godotenv"
 )
@@ -31,10 +32,10 @@ func main() {
 	fmt.Println("✅ Server running on http://localhost:8080")
 
 	// URL endpoint
-	http.HandleFunc("/books/get", handler.GetBooksHandler)      // GET
-	http.HandleFunc("/books/create", handler.CreateBookHandler) // POST
-	http.HandleFunc("/books/update", handler.UpdateBookHandler) // PUT
-	http.HandleFunc("/books/delete", handler.DeleteBookHandler) // DELETE
+	http.HandleFunc("/go/books/get", utils.WithCORS(handler.GetBooksHandler))      // GET
+	http.HandleFunc("/go/books/create", utils.WithCORS(handler.CreateBookHandler)) // POST
+	http.HandleFunc("/go/books/update", utils.WithCORS(handler.UpdateBookHandler)) // PUT
+	http.HandleFunc("/go/books/delete", utils.WithCORS(handler.DeleteBookHandler)) // DELETE
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
