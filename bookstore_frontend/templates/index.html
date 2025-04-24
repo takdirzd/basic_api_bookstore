@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookstore</title>
+  <!-- Linking to external CSS file -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <h1>Manajemen Buku</h1>
+
+  <div class="top-section">
+    <!-- Tambah Buku -->
+    <div class="form-box add">
+      <h2>Tambah Buku</h2>
+      <form onsubmit="event.preventDefault(); addBook();">
+        <input type="text" id="name" placeholder="Nama Buku" required />
+        <textarea id="description" placeholder="Deskripsi" required></textarea>
+        <input type="number" id="price" placeholder="Harga" required />
+        <button type="submit">Tambah</button>
+      </form>
+    </div>
+
+    <!-- Update Buku -->
+    <div class="form-box">
+      <h2>Update Buku</h2>
+      <form onsubmit="event.preventDefault(); updateBook();">
+        <input type="text" id="update-id" placeholder="ID Buku" required />
+        <input type="text" id="update-status" placeholder="Status Baru" required />
+        <button type="submit">Update</button>
+      </form>
+    </div>
+
+    <!-- Hapus Buku -->
+    <div class="form-box">
+      <h2>Hapus Buku</h2>
+      <form onsubmit="event.preventDefault(); deleteBook();">
+        <input type="text" id="delete-id" placeholder="ID Buku" required />
+        <button type="submit">Hapus</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabel Buku -->
+  <h2>Daftar Buku</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Deskripsi</th>
+        <th>Harga</th>
+        <th>Status</th>
+        <th>Jumlah</th>
+      </tr>
+    </thead>
+    <tbody id="book-list"></tbody>
+  </table>
+
+  <!-- Linking to external JavaScript file -->
+  <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
