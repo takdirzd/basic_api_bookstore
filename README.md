@@ -19,7 +19,7 @@ Ini adalah aplikasi **backend sederhana** untuk toko buku (Bookstore) yang diban
 ## Struktur Direktori
 
 ```
-backend/  
+bookstore_backend/  
 ├── db/               # Inisialisasi koneksi database  
 │   └── db.go  
 ├── handler/          # Handler endpoint API (CRUD)  
@@ -37,7 +37,7 @@ backend/
 └── main.go           # Entry point aplikasi  
 ```
 ```
-├── frontend/                      # Frontend Django
+├── bookstore_frontend/                      # Frontend Django
 │   ├── bookstore_frontend/
 │   │   ├── __init__.py
 │   │   ├── asgi.py
