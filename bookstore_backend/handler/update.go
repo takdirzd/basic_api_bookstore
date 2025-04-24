@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"bookstore/db"
-	"bookstore/utils"
+	"bookstore_backend/db"
+	"bookstore_backend/utils"
 )
 
 func UpdateBookHandler(w http.ResponseWriter, r *http.Request) {

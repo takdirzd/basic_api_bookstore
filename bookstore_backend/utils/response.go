@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"bookstore/model"
+	"bookstore_backend/model"
 )
 
 func JSONResponse(w http.ResponseWriter, status int, method, description string) {

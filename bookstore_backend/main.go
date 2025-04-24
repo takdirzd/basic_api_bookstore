@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"os"
 
-	"bookstore/db"
-	"bookstore/handler"
-	"bookstore/utils"
+	"bookstore_backend/db"
+	"bookstore_backend/handler"
+	"bookstore_backend/utils"
 
 	"github.com/joho/godotenv"
 )

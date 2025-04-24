@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"bookstore/db"
-	"bookstore/model"
-	"bookstore/utils"
+	"bookstore_backend/db"
+	"bookstore_backend/model"
+	"bookstore_backend/utils"
 )
 
 func GetBooksHandler(w http.ResponseWriter, r *http.Request) {
